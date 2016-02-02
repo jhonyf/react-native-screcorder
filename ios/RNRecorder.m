@@ -67,6 +67,11 @@
    _recorder.videoConfiguration.enabled = [RCTConvert BOOL:[video objectForKey:@"enabled"]];
    _recorder.videoConfiguration.bitrate = [RCTConvert int:[video objectForKey:@"bitrate"]];
    _recorder.videoConfiguration.timeScale = [RCTConvert float:[video objectForKey:@"timescale"]];
+   if([video objectForKey:@"size"] != nil)
+   {
+      _recorder.videoConfiguration.size = [RCTConvert CGSize:[video objectForKey:@"size"]];
+   }
+
    _videoFormat = [RCTConvert NSString:[video objectForKey:@"format"]];
    [self setVideoFormat:_videoFormat];
    _videoQuality = [RCTConvert NSString:[video objectForKey:@"quality"]];
