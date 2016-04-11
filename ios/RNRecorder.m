@@ -71,7 +71,10 @@
    {
       _recorder.videoConfiguration.size = [RCTConvert CGSize:[video objectForKey:@"size"]];
    }
-
+   if([config objectForKey:@"mirrorOnFrontCamera"] != nil)
+   {
+      _recorder.mirrorOnFrontCamera = [RCTConvert BOOL:[video objectForKey:@"mirrorOnFrontCamera"]];
+   }
    _videoFormat = [RCTConvert NSString:[video objectForKey:@"format"]];
    [self setVideoFormat:_videoFormat];
    _videoQuality = [RCTConvert NSString:[video objectForKey:@"quality"]];
