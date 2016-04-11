@@ -63,6 +63,12 @@
    NSInteger flash = (int)[RCTConvert NSInteger:[config objectForKey:@"flashMode"]];
    _recorder.flashMode = flash;
    
+   // Flip on Front Camera config
+   if([config objectForKey:@"mirrorOnFrontCamera"] != nil)
+   {
+      _recorder.mirrorOnFrontCamera = [RCTConvert BOOL:[config objectForKey:@"mirrorOnFrontCamera"]];
+   }
+   
    // Video config
    _recorder.videoConfiguration.enabled = [RCTConvert BOOL:[video objectForKey:@"enabled"]];
    _recorder.videoConfiguration.bitrate = [RCTConvert int:[video objectForKey:@"bitrate"]];
@@ -70,10 +76,6 @@
    if([video objectForKey:@"size"] != nil)
    {
       _recorder.videoConfiguration.size = [RCTConvert CGSize:[video objectForKey:@"size"]];
-   }
-   if([config objectForKey:@"mirrorOnFrontCamera"] != nil)
-   {
-      _recorder.mirrorOnFrontCamera = [RCTConvert BOOL:[video objectForKey:@"mirrorOnFrontCamera"]];
    }
    _videoFormat = [RCTConvert NSString:[video objectForKey:@"format"]];
    [self setVideoFormat:_videoFormat];
