@@ -1,12 +1,11 @@
-var React = require('react-native');
+import React, {PropTypes} from 'react';
 var {
-  PropTypes,
-  StyleSheet,
-  requireNativeComponent,
-  NativeModules,
-  View,
-  merge
-} = React;
+    StyleSheet,
+    requireNativeComponent,
+    NativeModules,
+    View,
+    merge
+} = require('react-native');
 merge = merge || require('merge');
 
 /******* ENUM **********/
