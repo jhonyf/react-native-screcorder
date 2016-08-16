@@ -484,7 +484,7 @@ static CGContextRef SCCreateContextFromPixelBuffer(CVPixelBufferRef pixelBuffer)
         renderingFilter = watermarkFilter;
     }
 
-    if (renderingFilter.isEmpty) {
+    if (renderingFilter.isEmpty && watermarkFilter == nil) {
         renderingFilter = nil;
     }
 
