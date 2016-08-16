@@ -81,6 +81,10 @@
    [self setVideoFormat:_videoFormat];
    _videoQuality = [RCTConvert NSString:[video objectForKey:@"quality"]];
    _videoFilters = [RCTConvert NSArray:[video objectForKey:@"filters"]];
+
+   NSString* watermarkImagePath = [RCTConvert NSString:[video objectForKey:@"watermarkImage"]];
+   _recorder.videoConfiguration.watermarkImage = [UIImage imageNamed: watermarkImagePath];
+   _recorder.videoConfiguration.watermarkFrame = CGRectMake(0, 0, _recorder.videoConfiguration.size.width, _recorder.videoConfiguration.size.height);
    
    // Audio config
    _recorder.audioConfiguration.enabled = [RCTConvert BOOL:[audio objectForKey:@"enabled"]];
@@ -249,6 +253,8 @@
    
    // Apply filters
    assetExportSession.videoConfiguration.filter = [self createFilter];
+   assetExportSession.videoConfiguration.watermarkFrame = _recorder.videoConfiguration.watermarkFrame;
+   assetExportSession.videoConfiguration.watermarkImage = _recorder.videoConfiguration.watermarkImage;
 
    [assetExportSession exportAsynchronouslyWithCompletionHandler: ^{
       callback(assetExportSession.error, assetExportSession.outputUrl);
