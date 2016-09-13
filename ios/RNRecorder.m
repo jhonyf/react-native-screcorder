@@ -72,6 +72,7 @@
    // Video config
    _recorder.videoConfiguration.enabled = [RCTConvert BOOL:[video objectForKey:@"enabled"]];
    _recorder.videoConfiguration.bitrate = [RCTConvert int:[video objectForKey:@"bitrate"]];
+   _recorder.videoConfiguration.maxFrameRate = [RCTConvert int:[video objectForKey:@"maxFrameRate"]];
    _recorder.videoConfiguration.timeScale = [RCTConvert float:[video objectForKey:@"timescale"]];
    if([video objectForKey:@"size"] != nil)
    {
@@ -248,8 +249,14 @@
    SCAssetExportSession *assetExportSession = [[SCAssetExportSession alloc] initWithAsset:asset];
    assetExportSession.outputFileType = _videoFormat;
    assetExportSession.outputUrl = [_session outputUrl];
+   
    assetExportSession.videoConfiguration.preset = _videoQuality;
+   assetExportSession.videoConfiguration.maxFrameRate = _recorder.videoConfiguration.maxFrameRate;
+   assetExportSession.videoConfiguration.bitrate = _recorder.videoConfiguration.bitrate;
+   
    assetExportSession.audioConfiguration.preset = _audioQuality;
+   assetExportSession.audioConfiguration.bitrate = _recorder.audioConfiguration.bitrate;
+   assetExportSession.audioConfiguration.channelsCount = _recorder.audioConfiguration.channelsCount;
    
    // Apply filters
    assetExportSession.videoConfiguration.filter = [self createFilter];
