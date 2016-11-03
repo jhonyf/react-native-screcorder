@@ -296,6 +296,7 @@
    
    if (_previewView == nil) {
       _previewView = [[UIView alloc] initWithFrame:self.bounds];
+      _previewView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
       _recorder.previewView = _previewView;
       [_previewView setBackgroundColor:[UIColor blackColor]];
       [self insertSubview:_previewView atIndex:0];
@@ -305,7 +306,8 @@
       [self setVideoFormat:_videoFormat];
       _recorder.session = _session;
    }
-   
+   [_recorder previewViewFrameChanged];
+
    return;
 }
 
