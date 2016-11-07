@@ -300,8 +300,10 @@
       _recorder.previewView = _previewView;
       [_previewView setBackgroundColor:[UIColor blackColor]];
       [self insertSubview:_previewView atIndex:0];
+#if !(TARGET_IPHONE_SIMULATOR)
       [_recorder startRunning];
-   
+#endif
+
       _session = [SCRecordSession recordSession];
       [self setVideoFormat:_videoFormat];
       _recorder.session = _session;
